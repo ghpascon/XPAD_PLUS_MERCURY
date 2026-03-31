@@ -1,0 +1,460 @@
+<!DOCTYPE html><html><head>
+      <title>README</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\DELL\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.20\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="xpad-plus---sistema-inteligente-de-leitura-rfid-uhf">XPAD PLUS - Sistema Inteligente de Leitura RFID UHF </h1>
+<blockquote>
+<p><strong>Solução profissional completa para identificação e rastreamento por RFID UHF</strong><br>
+Produto <strong>SMARTX</strong> - Tecnologia brasileira de alta performance</p>
+</blockquote>
+<hr>
+<h2 id="-visão-geral">🎯 <strong>Visão Geral</strong> </h2>
+<p>O <strong>XPAD PLUS</strong> é um leitor RFID UHF de alto desempenho desenvolvido pela <strong>SMARTX</strong> para aplicações industriais e comerciais que exigem <strong>precisão</strong>, <strong>confiabilidade</strong> e <strong>integração simples</strong>.</p>
+<p>Totalmente <strong>plug-and-play</strong>, o XPAD PLUS oferece múltiplas formas de conexão e controle:</p>
+<p>✅ <strong>Leitura simultânea de até 300 tags</strong> em memória<br>
+✅ <strong>4 antenas independentes</strong> com controle individual de potência (10-33 dBm)<br>
+✅ <strong>5 formas de conexão</strong>: Serial, BLE, Ethernet, Emulador de Teclado e Webhook<br>
+✅ <strong>Interface web completa</strong> para configuração sem necessidade de software externo<br>
+✅ <strong>Integração nativa</strong> com sistemas externos via HTTP/HTTPS<br>
+✅ <strong>I/O programáveis</strong> (3 entradas + 3 saídas) para automação industrial<br>
+✅ <strong>Pronto para usar</strong> - não requer programação ou desenvolvimento</p>
+<hr>
+<h2 id="-principais-funcionalidades">🚀 <strong>Principais Funcionalidades</strong> </h2>
+<h3 id="-leitura-rfid-de-alta-performance">📡 <strong>Leitura RFID de Alta Performance</strong> </h3>
+<ul>
+<li><strong>Protocolo</strong>: EPC Gen2 (ISO 18000-6C)</li>
+<li><strong>Capacidade</strong>: Até 300 tags simultâneas em memória</li>
+<li><strong>Modos de leitura</strong>:
+<ul>
+<li><strong>Leitura contínua</strong>: Captura automática de tags no campo</li>
+<li><strong>Leitura por trigger GPI</strong>: Ativação por sensor externo</li>
+<li><strong>Leitura sob demanda</strong>: Controle via comando ou interface web</li>
+</ul>
+</li>
+<li><strong>Filtros configuráveis</strong>:
+<ul>
+<li>RSSI mínimo ajustável</li>
+<li>Sessão Gen2 (S0, S1, S2, S3)</li>
+<li>Timeout de leitura personalizável</li>
+</ul>
+</li>
+</ul>
+<h3 id="-sistema-multi-antena-inteligente">🔌 <strong>Sistema Multi-Antena Inteligente</strong> </h3>
+<ul>
+<li><strong>4 portas de antena</strong> com controle independente:
+<ul>
+<li>Liga/desliga individual por antena</li>
+<li>Ajuste de potência de 10 a 33 dBm (por antena)</li>
+<li>Tempo de permanência configurável (dwell time)</li>
+</ul>
+</li>
+<li><strong>Balanceamento automático</strong> entre antenas ativas</li>
+<li><strong>Feedback em tempo real</strong> do RSSI (intensidade do sinal)</li>
+</ul>
+<h3 id="-conectividade---5-formas-de-integração">🌐 <strong>Conectividade - 5 Formas de Integração</strong> </h3>
+<p>O XPAD PLUS oferece <strong>máxima flexibilidade</strong> com múltiplos protocolos de comunicação simultâneos:</p>
+<h4 id="1-serial"><strong>1. Serial</strong> </h4>
+<ul>
+<li>Conexão via cabo USB</li>
+<li>Protocolo de comandos baseado em texto</li>
+</ul>
+<h4 id="2-bluetooth-low-energy-ble"><strong>2. Bluetooth Low Energy (BLE)</strong> </h4>
+<ul>
+<li>Comunicação sem fio de curto alcance</li>
+<li>Mesmo protocolo de comandos da serial</li>
+<li>Pareamento simples e rápido</li>
+</ul>
+<h4 id="3-ethernet"><strong>3. Ethernet</strong> </h4>
+<ul>
+<li>Conexão cabeada 10/100 Mbps full-duplex</li>
+<li>Suporta DHCP (automático) ou IP estático</li>
+<li>mDNS para descoberta automática na rede local</li>
+<li>Servidor Telnet integrado para debug e comandos remotos</li>
+</ul>
+<h4 id="4-emulador-de-teclado-hid"><strong>4. Emulador de Teclado (HID)</strong> </h4>
+<ul>
+<li>Simula um teclado USB conectado ao computador</li>
+<li>Tags lidas são digitadas automaticamente como se fossem teclado</li>
+<li><strong>Plug-and-play</strong> total - não requer drivers ou software</li>
+<li>Compatível com Windows, Linux, macOS, Android</li>
+</ul>
+<h4 id="5-webhook-httphttps"><strong>5. Webhook (HTTP/HTTPS)</strong> </h4>
+<ul>
+<li>Envio automático de eventos para servidores externos</li>
+<li>Suporte a HTTP e HTTPS</li>
+<li>Payload JSON estruturado com eventos de tag e keep-alive</li>
+<li>Configuração via interface web (URL, período, nome do dispositivo)</li>
+<li>Batching inteligente (até 50 tags por requisição)</li>
+</ul>
+<h4 id="interface-web-embarcada"><strong>Interface Web Embarcada</strong> </h4>
+<p>Além das formas de comunicação, o XPAD PLUS possui um servidor web completo acessível via navegador:</p>
+<table>
+<thead>
+<tr>
+<th>Página</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Home</strong></td>
+<td>Dashboard com status do sistema</td>
+</tr>
+<tr>
+<td><strong>Reader Config</strong></td>
+<td>Configuração de potência, sessão, modos de leitura</td>
+</tr>
+<tr>
+<td><strong>Antenna Config</strong></td>
+<td>Controle individual das 4 antenas</td>
+</tr>
+<tr>
+<td><strong>Ethernet Config</strong></td>
+<td>Configuração de rede (DHCP/estático)</td>
+</tr>
+<tr>
+<td><strong>Webhook Config</strong></td>
+<td>Integração HTTP/HTTPS para envio de eventos</td>
+</tr>
+<tr>
+<td><strong>GPO Test</strong></td>
+<td>Teste manual de saídas digitais</td>
+</tr>
+<tr>
+<td><strong>Reader Status</strong></td>
+<td>Monitoramento de tags lidas em tempo real</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Acesso</strong>: Basta digitar o IP do dispositivo no navegador - sem instalação de software!</p>
+<h3 id="-io-industrial">🔌 <strong>I/O Industrial</strong> </h3>
+<h4 id="entradas-digitais-gpi"><strong>Entradas Digitais (GPI)</strong> </h4>
+<ul>
+<li><strong>3 entradas</strong> opto-isoladas (5V/24V compatível)</li>
+<li><strong>Modos de operação</strong>:
+<ul>
+<li>Trigger de leitura</li>
+<li>Início/parada automática</li>
+<li>Delay configurável de parada</li>
+</ul>
+</li>
+</ul>
+<h4 id="saídas-digitais-gpo"><strong>Saídas Digitais (GPO)</strong> </h4>
+<ul>
+<li><strong>3 saídas</strong> programáveis</li>
+<li><strong>Aplicações</strong>:
+<ul>
+<li>Sinalização visual (torre luminosa)</li>
+<li>Controle de cancelas/portas</li>
+<li>Acionamento de alarmes</li>
+<li>Trigger de câmeras</li>
+</ul>
+</li>
+</ul>
+<h3 id="-feedback-visual-e-sonoro">🎨 <strong>Feedback Visual e Sonoro</strong> </h3>
+<ul>
+<li><strong>LED RGB integrado</strong> com indicação de status:
+<ul>
+<li>🟢 Verde: Leitura ativa</li>
+<li>🔴 Vermelho: Erro de comunicação</li>
+<li>🟡 Amarelo: Aguardando leitura</li>
+</ul>
+</li>
+<li><strong>Buzzer</strong> para feedback sonoro (configurável via software)</li>
+</ul>
+<hr>
+<h2 id="-casos-de-uso">📊 <strong>Casos de Uso</strong> </h2>
+<h3 id="-industrial">🏭 <strong>Industrial</strong> </h3>
+<ul>
+<li>Controle de produção (WIP tracking)</li>
+<li>Rastreamento de ferramentas e ativos</li>
+<li>Controle de acesso de pessoal</li>
+</ul>
+<h3 id="-logística">📦 <strong>Logística</strong> </h3>
+<ul>
+<li>Controle de estoque em tempo real</li>
+<li>Portaria inteligente (entrada/saída)</li>
+<li>Separação automatizada (picking)</li>
+</ul>
+<h3 id="-varejo">🏬 <strong>Varejo</strong> </h3>
+<ul>
+<li>Inventário automatizado</li>
+<li>Antifurto inteligente</li>
+<li>Self-checkout</li>
+</ul>
+<h3 id="-saúde">🏥 <strong>Saúde</strong> </h3>
+<ul>
+<li>Rastreamento de medicamentos</li>
+<li>Controle de instrumentais cirúrgicos</li>
+<li>Gestão de prontuários</li>
+</ul>
+<hr>
+<h2 id="️-especificações-técnicas">⚙️ <strong>Especificações Técnicas</strong> </h2>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Especificação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frequência</strong></td>
+<td>902–907,5 - 915–928 MHz</td>
+</tr>
+<tr>
+<td><strong>Potência de saída</strong></td>
+<td>10 a 33 dBm</td>
+</tr>
+<tr>
+<td><strong>Portas de antena</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Interface de rede</strong></td>
+<td>Ethernet 10/100 Mbps</td>
+</tr>
+<tr>
+<td><strong>Protocolos</strong></td>
+<td>HTTP, HTTPS, Telnet, mDNS, Serial (UART), Bluetooth (BLE), HID (Teclado)</td>
+</tr>
+<tr>
+<td><strong>GPO/GPI</strong></td>
+<td>3 entradas / 3 saídas</td>
+</tr>
+<tr>
+<td><strong>Alimentação</strong></td>
+<td>5V DC</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="-segurança">🔐 <strong>Segurança</strong> </h2>
+<ul>
+<li>Persistência local de configurações (LittleFS)</li>
+<li>Suporte a HTTPS (webhook com certificados auto-assinados)</li>
+<li>Controle de acesso via rede (IP estático)</li>
+<li>Watchdog multi-core para recuperação automática</li>
+</ul>
+<hr>
+<h2 id="️-manutenção-e-suporte">🛠️ <strong>Manutenção e Suporte</strong> </h2>
+<h3 id="diagnóstico"><strong>Diagnóstico</strong> </h3>
+<ul>
+<li>Logs via Telnet (porta 23)</li>
+<li>Monitor serial (115200 baud)</li>
+<li>Página de status web em tempo real</li>
+</ul>
+<h3 id="atualizações"><strong>Atualizações</strong> </h3>
+<ul>
+<li>OTA (Over-The-Air) via interface web:
+<ul>
+<li>Upload de firmware (.bin)</li>
+<li>Upload de filesystem (.bin)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="-configuração-rápida">📝 <strong>Configuração Rápida</strong> </h2>
+<h3 id="opção-1-conexão-via-wifi-access-point"><strong>Opção 1: Conexão via WiFi (Access Point)</strong> </h3>
+<p><strong>Ideal para primeira configuração ou quando não há cabo de rede disponível</strong></p>
+<ol>
+<li>
+<p><strong>Ligue o equipamento</strong></p>
+<ul>
+<li>Aguarde cerca de 5 segundos até o LED ficar amarelo</li>
+</ul>
+</li>
+<li>
+<p><strong>Conecte-se à rede WiFi do dispositivo</strong></p>
+<ul>
+<li>No seu computador, tablet ou smartphone, procure por redes WiFi disponíveis</li>
+<li>Procure pela rede: <strong><code>SMTX-&lt;número&gt;</code></strong> (exemplo: SMTX-A1B2C3D4)</li>
+<li>Senha padrão: <strong><code>smartx12345</code></strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Acesse a interface web</strong></p>
+<ul>
+<li>Abra seu navegador (Chrome, Firefox, Edge, Safari)</li>
+<li>Digite na barra de endereços: <strong><code>192.168.4.1</code></strong></li>
+<li>Pressione Enter</li>
+</ul>
+</li>
+<li>
+<p><strong>Pronto!</strong></p>
+<ul>
+<li>A interface de configuração do XPAD PLUS será exibida</li>
+<li>Configure as antenas, Ethernet e demais parâmetros</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>💡 <strong>Dica</strong>: Após configurar o Ethernet, você pode desconectar do WiFi e acessar o dispositivo via cabo de rede</p>
+</blockquote>
+<hr>
+<h3 id="opção-2-conexão-via-ethernet"><strong>Opção 2: Conexão via Ethernet</strong> </h3>
+<p><strong>Ideal para instalação permanente em rede corporativa</strong></p>
+<ol>
+<li>
+<p><strong>Conecte o cabo Ethernet</strong></p>
+<ul>
+<li>Conecte um cabo de rede entre o XPAD PLUS e seu switch/roteador</li>
+</ul>
+</li>
+<li>
+<p><strong>Descubra o IP do dispositivo</strong></p>
+<ul>
+<li><strong>Opção A (via WiFi)</strong>: Conecte-se ao WiFi do dispositivo (veja Opção 1) e verifique o IP atual em <strong>Ethernet Config</strong></li>
+<li><strong>Opção B (via serial)</strong>: Use um terminal serial e envie o comando <code>#get_info</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Acesse a interface web</strong></p>
+<ul>
+<li>Digite o IP descoberto no navegador</li>
+<li>Configure o modo de rede (DHCP ou IP estático) conforme sua infraestrutura</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="opção-3-primeiro-teste-rápido-modo-teclado"><strong>Opção 3: Primeiro Teste Rápido (Modo Teclado)</strong> </h3>
+<p><strong>Para testar sem configuração - apenas conecte e use</strong></p>
+<ol>
+<li>
+<p><strong>Ative o modo Emulador de Teclado</strong></p>
+<ul>
+<li>Conecte via WiFi ou Ethernet (opções acima)</li>
+<li>Na interface web, vá em <strong>Reader Modes</strong></li>
+<li>Ative a opção <strong>"Keyboard"</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Conecte às antenas</strong></p>
+<ul>
+<li>Conecte as antenas RFID nas portas desejadas</li>
+</ul>
+</li>
+<li>
+<p><strong>Teste imediatamente</strong></p>
+<ul>
+<li>Abra um bloco de notas (Notepad, Word, etc.)</li>
+<li>Aproxime uma tag RFID da antena</li>
+<li>O código será "digitado" automaticamente no documento</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>💡 <strong>Plug-and-Play</strong>: Nesse modo, o XPAD funciona como um teclado - não precisa instalar nada!</p>
+</blockquote>
+<hr>
+<h3 id="teste-de-leitura"><strong>Teste de Leitura</strong> </h3>
+<ol>
+<li>Acesse <strong>Reader</strong> na interface web</li>
+<li>Clique em <strong>"READ"</strong></li>
+<li>Aproxime tags RFID das antenas</li>
+<li>Visualize as leituras em tempo real na tela</li>
+</ol>
+<hr>
+<h2 id="-diferenciais-competitivos">🎓 <strong>Diferenciais Competitivos</strong> </h2>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>XPAD PLUS</th>
+<th>Concorrentes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>5 formas de conexão</strong></td>
+<td>✅ Serial, BLE, Ethernet, HID, Webhook</td>
+<td>❌ Apenas 1 ou 2 protocolos</td>
+</tr>
+<tr>
+<td><strong>Interface web embarcada</strong></td>
+<td>✅ Completa, sem instalação</td>
+<td>❌ Requer software proprietário</td>
+</tr>
+<tr>
+<td><strong>Emulador de teclado</strong></td>
+<td>✅ Plug-and-play total</td>
+<td>❌ Não disponível</td>
+</tr>
+<tr>
+<td><strong>Webhook nativo</strong></td>
+<td>✅ HTTP/HTTPS integrado</td>
+<td>⚠️ Apenas via gateway externo</td>
+</tr>
+<tr>
+<td><strong>Configuração simples</strong></td>
+<td>✅ Via navegador</td>
+<td>❌ Software desktop obrigatório</td>
+</tr>
+<tr>
+<td><strong>Multi-plataforma</strong></td>
+<td>✅ Windows, Linux, macOS, Android</td>
+<td>⚠️ Apenas Windows</td>
+</tr>
+<tr>
+<td><strong>Suporte técnico</strong></td>
+<td>✅ Nacional (Brasil)</td>
+<td>❌ Importado, suporte limitado</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="-segurança-e-confiabilidade">🔐 <strong>Segurança e Confiabilidade</strong> </h2>
+<ul>
+<li>Persistência local de configurações em memória flash</li>
+<li>Suporte a HTTPS para comunicação segura via webhook</li>
+<li>Watchdog automático para recuperação de falhas</li>
+<li>Proteção contra perda de dados em quedas de energia</li>
+<li>Rede WiFi com senha protegida (padrão: smartx12345)</li>
+</ul>
+<hr>
+<h2 id="-contato-e-suporte">📞 <strong>Contato e Suporte</strong> </h2>
+<p>Para mais informações sobre o <strong>XPAD PLUS</strong>:</p>
+<ul>
+<li><strong>Fabricante</strong>: SMARTX - Tecnologia RFID Brasileira</li>
+<li><strong>Suporte técnico</strong>: Disponível em português</li>
+<li><strong>Documentação</strong>: Guia completo de comandos e integração disponível</li>
+</ul>
+<hr>
+<h2 id="-licença">📄 <strong>Licença</strong> </h2>
+<p>Produto desenvolvido e fabricado por <strong>SMARTX</strong> - Todos os direitos reservados.</p>
+<hr>
+<p><strong>Transforme sua operação com tecnologia RFID inteligente. Escolha XPAD PLUS.</strong></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

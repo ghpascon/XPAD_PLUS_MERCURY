@@ -1,0 +1,9 @@
+{
+  "C_Cpp.errorSquiggles": "disabled",
+  "files.associations": {
+    "*.h": "cpp",
+    "*.html": "jinja-html",
+    "thread": "cpp",
+    "cstddef": "cpp"
+  }
+}

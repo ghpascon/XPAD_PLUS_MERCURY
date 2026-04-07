@@ -1,5 +1,6 @@
 #include "vars.h"
 #include "serial_write_commands.h"
+#include <stdio.h>
 
 class MySerialCheck : private serial_port_write
 {
@@ -479,7 +480,257 @@ public:
         // ================= Fallback =================
         else
         {
-            myserial.write("#INVALID_CMD: " + cmd);
+            if (!check_byte_cmd(cmd))
+                myserial.write("#INVALID_CMD: " + cmd);
         }
+    }
+
+    bool check_byte_cmd(String cmd)
+    {
+        // Tratamento rápido para o frame específico que contém 'ff' no meio
+        int specialPos = cmd.indexOf("ff08228810001303e80fff1077");
+        if (specialPos != -1)
+        {
+            if (current_tag == 0)
+                myserial.write_bytes("ff0022040084e0");
+            else
+            {
+                char buf[9];
+                // formata current_tag como 4 bytes em hex (8 chars) com padding de zeros
+                snprintf(buf, sizeof(buf), "%08x", (unsigned long)current_tag);
+                String amount_cmd = String("ff0822000088000013") + String(buf);
+                String full = amount_cmd + myserial.get_return_crc(amount_cmd);
+                myserial.write_bytes(full.c_str());
+            }
+
+            int after = specialPos + String("ff08228810001303e80fff1077").length();
+            if (after < cmd.length())
+                return check_byte_cmd(cmd.substring(after));
+            else
+                return true;
+        }
+
+        // Busca o próximo comando começando por 'ff'
+        int start = cmd.indexOf("ff");
+        if (start == -1)
+            return true;
+        int next = cmd.indexOf("ff", start + 2);
+        String byte_cmd = (next == -1) ? cmd.substring(start) : cmd.substring(start, next);
+        myserial.write("#BYTE_CMD: " + byte_cmd);
+
+        // SETUP
+        if (byte_cmd == "ff00031d0c")
+            myserial.write_bytes("ff14030000141208003000000220220804010b0125000000107962");
+        else if (byte_cmd == "ff000c1d03")
+            myserial.write_bytes("ff010c0000526303");
+        else if (byte_cmd == "ff00681d67")
+            myserial.write_bytes("ff0168000000a4bf");
+        else if (byte_cmd == "ff026a010e2e40")
+            myserial.write_bytes("ff036a0000010e003044");
+        else if (byte_cmd == "ff04060001c200a460")
+            myserial.write_bytes("ff00060000e406");
+        else if (byte_cmd == "ff026a01122e5c")
+            myserial.write_bytes("ff046a00000112000069af");
+        else if (byte_cmd == "ff026a01032e4d" || byte_cmd == "ff026a01032e6d")
+            myserial.write_bytes("ff036a00000103003d44");
+        else if (byte_cmd == "ff026a010c2e42" || byte_cmd == "ff026a010c2e62")
+            myserial.write_bytes("ff036a0000010c013245");
+        else if (byte_cmd == "ff026a010d2e43")
+            myserial.write_bytes("ff066a0000010d000000001543");
+        else if (byte_cmd == "ff00631d6c")
+            myserial.write_bytes("ff0263000000052146");
+        else if (byte_cmd == "ff00711d7e")
+            myserial.write_bytes("ff1a7100000d0e04050608090b0c101112131415161718191a1b1c1d1e20ff3ee9");
+        else if (byte_cmd == "ff00671d68")
+            myserial.write_bytes("ff016700000db48c");
+        else if (byte_cmd == "ff01970d4bb0")
+            myserial.write_bytes("ff00970000779e");
+        else if (byte_cmd == "ff026a01042e4a")
+            myserial.write_bytes("ff036a00000104003a44");
+        else if (byte_cmd == "ff00701d7f")
+            myserial.write_bytes("ff0270000000053b75");
+        else if (byte_cmd == "ff04060001c200a460")
+            myserial.write_bytes("ff00060000e406");
+
+        else if (byte_cmd == "ff016201bebc")
+            myserial.write_bytes("ff07620000010a8c0a8c000054b4");
+        else if (byte_cmd == "ff02940a8c2b13")
+            myserial.write_bytes("ff0094000047fd");
+        else if (byte_cmd == "ff00651d6a")
+            myserial.write_bytes("ffc8650000000e2130000e0830000e1c80000e13e8000e1000000e1e10000e0380000e06a0000e17d0000e10c8000e1640000e0a88000e0768000e0e70000e2388000e2450000e0ce0000e1af0000e1898000e0da8000e1bb8000e1190000e0128000e14b0000e05d8000dff98000e22c0000e1960000e08f8000e21f8000e1d48000e0448000e0510000e1578000e02b8000e2518000e1ed8000e1258000e1320000e0060000e0b50000e2068000e0c18000e1a28000e01f0000e25e0000e09c0000e0f38000e1708000e1fa05ff6");
+        else if (byte_cmd == "ff026b05103a7f")
+            myserial.write_bytes("ff036b00000510001874");
+        else if (byte_cmd == "ff026b05113a7e")
+            myserial.write_bytes("ff036b00000511001974");
+        else if (byte_cmd == "ff026b05023a6d")
+            myserial.write_bytes("ff036b00000502020a76");
+        else if (byte_cmd == "ff026b05003a6f")
+            myserial.write_bytes("ff036b00000500000874");
+        else if (byte_cmd == "ff026b05013a6e")
+            myserial.write_bytes("ff046b0000050101002c68");
+        else if (byte_cmd == "ff026b05123a7d")
+            myserial.write_bytes("ff036b00000512001a74");
+        else if (byte_cmd == "ff026b05163a79")
+            myserial.write_bytes("ff046b0000051600024fbc");
+        else if (byte_cmd == "ff026a01042e4a")
+            myserial.write_bytes("ff036a00000104003a44");
+        else if (byte_cmd == "ff026a01042e4a")
+            myserial.write_bytes("ff036a00000104003a44");
+        else if (byte_cmd == "ff00701d7f")
+            myserial.write_bytes("ff0270000000053b75");
+        else if (byte_cmd == "ff02100000f093")
+            myserial.write_bytes("ff37100000007f01024149020200300402720908020001100b3430302d303036372d303220023041401231363233303036373932373136373236392b7393");
+        else if (byte_cmd == "ff02100040f0d3")
+            myserial.write_bytes("ff161000000040401231363233303036373932373136373236392b7bfc");
+        else if (byte_cmd.startsWith("ff039a01"))
+            myserial.write_bytes("ff009a0000a633");
+        else if (byte_cmd == "ff0361000005010061df")
+            myserial.write_bytes("ff0361000005010061df");
+        else if (byte_cmd == "ff 03 9a 01 0c 00 a3 5d")
+            myserial.write_bytes("ff 00 9a 00 00 a6 33");
+        else if (byte_cmd == "ff039b050202deea")
+            myserial.write_bytes("ff009b0000b612");
+        else if (byte_cmd == "ff039b051200cee8")
+            myserial.write_bytes("ff009b0000b612");
+        else if (byte_cmd == "ff039b051600cae8")
+            myserial.write_bytes("ff009b0000b612");
+        else if (byte_cmd == "ff039b051000cce8")
+            myserial.write_bytes("ff009b0000b612");
+        else if (byte_cmd == "ff039b051100cde8")
+            myserial.write_bytes("ff009b0000b612");
+        else if (byte_cmd == "ff039b050000dce8")
+            myserial.write_bytes("ff009b0000b612");
+        else if (byte_cmd == "ff049b05010100a2fd")
+            myserial.write_bytes("ff009b0000b612");
+        else if (byte_cmd == "ff036c019f41897b")
+            myserial.write_bytes("ff036c0000019f41869c");
+        else if (byte_cmd.startsWith("ff039a01"))
+            myserial.write_bytes("ff009a0000a633");
+        else if (byte_cmd == "ff02060029824d")
+            myserial.write_bytes("ff00060000e406");
+        else if (byte_cmd == "ff00691d66")
+            myserial.write_bytes("ff0169000000978e");
+        else if (byte_cmd == "ff026a01082e46")
+            myserial.write_bytes("ff036a00000108013645");
+        else if (byte_cmd == "ff026b03103c7f")
+            myserial.write_bytes("ff026b040203106774");
+        else if (byte_cmd == "ff026b05143a7b")
+            myserial.write_bytes("ff036b00000514001c74");
+        else if (byte_cmd == "ff016104bdb9")
+            myserial.write_bytes("ff71610000040180008000000002800080000000038000800000000480008000000005800080000000068000800000000780008000000008800080000000098000800000000a8000800000000b8000800000000c8000800000000d8000800000000e8000800000000f800080000000108000800000000160");
+
+        else if (byte_cmd == "ff026b03113c7e")
+            myserial.write_bytes("ff026b040203116775");
+        else if (byte_cmd == "ff026a01092e47")
+            myserial.write_bytes("ff036a00000109013745");
+        else if (byte_cmd == "ff026a01002e4e")
+            myserial.write_bytes("ff036a00000100003e44");
+        else if (byte_cmd == "ff026b03123c7d")
+            myserial.write_bytes("ff026b040203126776");
+        else if (byte_cmd == "ff026a01062e48")
+            myserial.write_bytes("ff036a00000106003844");
+        else if (byte_cmd == "ff039a010400ab5d")
+            myserial.write_bytes("ff009a0000a633");
+        else if (byte_cmd == "ff026b05003a6f")
+            myserial.write_bytes("ff036b00000500000874");
+        else if (byte_cmd == "ff026c01004e88")
+            myserial.write_bytes("ff026c000001000c72");
+        else if (byte_cmd == "ff002a1d25")
+            myserial.write_bytes("ff002a000001e8");
+        else if (byte_cmd == "ff039a010c01a35c")
+            myserial.write_bytes("ff009a0000a633");
+
+        else if (byte_cmd == "ff016200bebd")
+            myserial.write_bytes("ff036200000004b0af16");
+        else if (byte_cmd == "ff039a010401ab5c")
+            myserial.write_bytes("ff009a0000a633");
+        else if (byte_cmd == "ff07910701007d02007dc568")
+            myserial.write_bytes("ff009100001758");
+        else if (byte_cmd == "ff016601babc")
+            myserial.write_bytes("ff0d66000001010100020100030100040100fcf4");
+        else if (byte_cmd == "ff039a010c00a35d")
+            myserial.write_bytes("ff009a0000a633");
+        else if (byte_cmd == "ff00031d0c")
+            myserial.write_bytes("ff14030000141208003000000220220804010b0125000000107962");
+        else if (byte_cmd == "ff0196014abc")
+            myserial.write_bytes("ff02960000010128e0");
+        else if (byte_cmd == "ff0196024abf")
+            myserial.write_bytes("ff0296000002012be0");
+        // else if (byte_cmd == "ff082288100013031f0fff8f8f")
+        //     myserial.write_bytes("");
+        // else if (byte_cmd == "ff03290fff00facd")
+        //     myserial.write_bytes("");
+        // else if (byte_cmd == "")
+        //     myserial.write_bytes("");
+        // else if (byte_cmd == "")
+        //     myserial.write_bytes("");
+        // else if (byte_cmd == "")
+        //     myserial.write_bytes("");
+        // else if (byte_cmd == "")
+        //     myserial.write_bytes("");
+        // else if (byte_cmd == "")
+        //     myserial.write_bytes("");
+
+        // TAGS
+        else if (byte_cmd == "ff08228810001303e80fff1077")
+        {
+            if (current_tag == 0)
+                myserial.write_bytes("ff0022040084e0");
+            else
+            {
+                char buf[9];
+                // formata current_tag como 4 bytes em hex (8 chars) com padding de zeros
+                snprintf(buf, sizeof(buf), "%08x", (unsigned long)current_tag);
+                String amount_cmd = String("ff0822000088000013") + String(buf);
+
+                myserial.write_bytes(amount_cmd + myserial.get_return_crc(amount_cmd));
+            }
+        }
+        // POWER
+        else if (byte_cmd.startsWith("ff0292"))
+        {
+            byte power = strtol(byte_cmd.substring(6, 10).c_str(), nullptr, 16) / 100;
+            antena_commands.set_power_all(power);
+            myserial.write_bytes("ff00920000273b");
+        }
+
+        // Reading
+        else if (byte_cmd.startsWith("ff0161"))
+        {
+            read_on = true;
+            myserial.write_bytes("ff0361000005010061df");
+        }
+        else if (byte_cmd == "ff026a010b2e45")
+        {
+            read_on = true;
+            myserial.write_bytes("ff036a0000010b003544");
+        }
+        else if (byte_cmd.startsWith("ff132f"))
+        {
+            myserial.write_bytes("ff042f0000012200006dc3ff0b2200008800011b0282008200011c1d49");
+            read_on = true;
+        }
+        else if (byte_cmd == "ff039102010142c5")
+        {
+            myserial.write_bytes("ff009100001758");
+            read_on = true;
+        }
+        else if (byte_cmd == "ff8fa0d956eccaef" || byte_cmd == "ffdd082008393de9")
+            read_on = true;
+
+        else if (byte_cmd == "ff00721d7d")
+        {
+            read_on = false;
+            myserial.write_bytes("ff017200001e4819");
+        }
+        else if (byte_cmd == "ff032f0000025e86")
+        {
+            read_on = false;
+        }
+        // Chama recursivamente para processar o restante
+        if (next != -1 && next < cmd.length())
+            check_byte_cmd(cmd.substring(next));
+
+        return true;
     }
 };

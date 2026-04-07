@@ -153,10 +153,15 @@ private:
 			epc = epcToGtin(epc);
 		if (epc == "")
 			return;
-		if (!simple_send)
-			myserial.write("#T+@" + epc + "|" + tid + "|" + ant + "|" + rssi + "|" + (send_protect_mode ? "on" : "off"));
-		else
-			myserial.write(epc, true);
+		// if (!simple_send)
+		// 	myserial.write("#T+@" + epc + "|" + tid + "|" + ant + "|" + rssi + "|" + (send_protect_mode ? "on" : "off"));
+		// else
+		// 	myserial.write(epc, true);
+		String tag_info = "ff212200008810011b00570101dc110000002d0500803000" + epc + "1d8c";
+		// String tag_info = "ff212200008810011b00570101d711000001e805008030000000000000000000000000011d8c";
+		String crc = myserial.get_return_crc(tag_info);
+		tag_info += crc;
+		// myserial.write_bytes(tag_info);
 	}
 
 	// Calculate GTIN check digit (mod 10)

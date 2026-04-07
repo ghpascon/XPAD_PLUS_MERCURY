@@ -485,40 +485,12 @@ public:
         }
     }
 
-    bool check_byte_cmd(String cmd)
+    // Helper: processa um único byte_cmd e opcionalmente chama check_byte_cmd para o restante
+    bool handle_byte_cmd(String byte_cmd, String rest)
     {
-        // Tratamento rápido para o frame específico que contém 'ff' no meio
-        int specialPos = cmd.indexOf("ff08228810001303e80fff1077");
-        if (specialPos != -1)
-        {
-            if (current_tag == 0)
-                myserial.write_bytes("ff0022040084e0");
-            else
-            {
-                char buf[9];
-                // formata current_tag como 4 bytes em hex (8 chars) com padding de zeros
-                snprintf(buf, sizeof(buf), "%08x", (unsigned long)current_tag);
-                String amount_cmd = String("ff0822000088000013") + String(buf);
-                String full = amount_cmd + myserial.get_return_crc(amount_cmd);
-                myserial.write_bytes(full.c_str());
-            }
-
-            int after = specialPos + String("ff08228810001303e80fff1077").length();
-            if (after < cmd.length())
-                return check_byte_cmd(cmd.substring(after));
-            else
-                return true;
-        }
-
-        // Busca o próximo comando começando por 'ff'
-        int start = cmd.indexOf("ff");
-        if (start == -1)
-            return true;
-        int next = cmd.indexOf("ff", start + 2);
-        String byte_cmd = (next == -1) ? cmd.substring(start) : cmd.substring(start, next);
         myserial.write("#BYTE_CMD: " + byte_cmd);
 
-        // SETUP
+        // SETUP e outros handlers (mantive a lógica existente)
         if (byte_cmd == "ff00031d0c")
             myserial.write_bytes("ff14030000141208003000000220220804010b0125000000107962");
         else if (byte_cmd == "ff000c1d03")
@@ -656,35 +628,28 @@ public:
             myserial.write_bytes("ff02960000010128e0");
         else if (byte_cmd == "ff0196024abf")
             myserial.write_bytes("ff0296000002012be0");
-        // else if (byte_cmd == "ff082288100013031f0fff8f8f")
-        //     myserial.write_bytes("");
-        // else if (byte_cmd == "ff03290fff00facd")
-        //     myserial.write_bytes("");
-        // else if (byte_cmd == "")
-        //     myserial.write_bytes("");
-        // else if (byte_cmd == "")
-        //     myserial.write_bytes("");
-        // else if (byte_cmd == "")
-        //     myserial.write_bytes("");
-        // else if (byte_cmd == "")
-        //     myserial.write_bytes("");
-        // else if (byte_cmd == "")
-        //     myserial.write_bytes("");
 
         // TAGS
-        else if (byte_cmd == "ff08228810001303e80fff1077")
+        else if (byte_cmd.startsWith("ff082288"))
         {
+            read_on = false;
             if (current_tag == 0)
                 myserial.write_bytes("ff0022040084e0");
             else
             {
                 char buf[9];
-                // formata current_tag como 4 bytes em hex (8 chars) com padding de zeros
                 snprintf(buf, sizeof(buf), "%08x", (unsigned long)current_tag);
                 String amount_cmd = String("ff0822000088000013") + String(buf);
-
                 myserial.write_bytes(amount_cmd + myserial.get_return_crc(amount_cmd));
             }
+        }
+        else if (byte_cmd == "ff03290fff00facd")
+        {
+            current_tag--;
+            String answer = "ff292900000fff00011dda110e05d80000000b00ae0500000002000000803400" + tags[current_tag].epc + "e71f";
+            tags[current_tag].epc = "";
+            tags[current_tag].tid = "";
+            myserial.write_bytes(answer + myserial.get_return_crc(answer));
         }
         // POWER
         else if (byte_cmd.startsWith("ff0292"))
@@ -727,10 +692,60 @@ public:
         {
             read_on = false;
         }
-        // Chama recursivamente para processar o restante
-        if (next != -1 && next < cmd.length())
-            check_byte_cmd(cmd.substring(next));
+
+        // processa o restante se houver
+        if (rest.length() > 0)
+            check_byte_cmd(rest);
 
         return true;
+    }
+
+    bool check_byte_cmd(String cmd)
+    {
+        // Lista de special commands: prefix + comprimento esperado (em caracteres hex)
+        struct SpecialEntry
+        {
+            const char *prefix;
+            int len; // tamanho em chars hex (ex: 26 corresponde a 13 bytes)
+        };
+
+        static const SpecialEntry specialList[] = {
+            {"ff082288", 26},        // comandos que começam com ff082288 têm 26 chars
+            {"ff03290fff00facd", 16} // comando completo conhecido
+        };
+
+        int specialPos = -1;
+        int specialLen = 0;
+        int nSpecial = sizeof(specialList) / sizeof(specialList[0]);
+
+        for (int i = 0; i < nSpecial; i++)
+        {
+            int pos = cmd.indexOf(specialList[i].prefix);
+            if (pos != -1 && (specialPos == -1 || pos < specialPos))
+            {
+                specialPos = pos;
+                specialLen = specialList[i].len;
+            }
+        }
+
+        if (specialPos != -1)
+        {
+            // Se não temos comprimento suficiente para o frame especial, aguarda mais dados
+            if (cmd.length() < specialPos + specialLen)
+                return false;
+
+            String byte_cmd = cmd.substring(specialPos, specialPos + specialLen);
+            String rest = (specialPos + specialLen < cmd.length()) ? cmd.substring(specialPos + specialLen) : String("");
+            return handle_byte_cmd(byte_cmd, rest);
+        }
+
+        // Busca o próximo comando começando por 'ff'
+        int start = cmd.indexOf("ff");
+        if (start == -1)
+            return true;
+        int next = cmd.indexOf("ff", start + 2);
+        String byte_cmd = (next == -1) ? cmd.substring(start) : cmd.substring(start, next);
+        String rest = (next != -1 && next < cmd.length()) ? cmd.substring(next) : String("");
+        return handle_byte_cmd(byte_cmd, rest);
     }
 };

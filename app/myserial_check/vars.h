@@ -36,3 +36,4 @@ extern String prefix;
 extern PINS pins;
 
 extern int current_tag;
+extern TAG tags[];
